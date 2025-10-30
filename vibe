@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# VibeKanban Wrapper Script
+# Provides choice between using API key or subscription
+
+# Check if ANTHROPIC_API_KEY is set
+if [ -n "$ANTHROPIC_API_KEY" ]; then
+    echo "VibeKanban Launcher"
+    echo "=================="
+    echo "1) Use API key (current environment)"
+    echo "2) Use subscription (unset API key)"
+    echo
+    read -p "Choose option (1-2): " choice
+    
+    case $choice in
+        1)
+            echo "Starting VibeKanban with API key..."
+            npx vibe-kanban
+            ;;
+        2)
+            echo "Starting VibeKanban with subscription..."
+            unset ANTHROPIC_API_KEY
+            npx vibe-kanban
+            ;;
+        *)
+            echo "Invalid choice. Exiting."
+            exit 1
+            ;;
+    esac
+else
+    echo "Starting VibeKanban with subscription..."
+    npx vibe-kanban
+fi
