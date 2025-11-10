@@ -8,10 +8,13 @@ if [ -n "$ANTHROPIC_API_KEY" ]; then
     echo "VibeKanban Launcher"
     echo "=================="
     echo "1) Use API key (current environment)"
-    echo "2) Use subscription (unset API key)"
+    echo "2) Use subscription (unset API key) [default]"
     echo
-    read -p "Choose option (1-2): " choice
-    
+    read -p "Choose option (1-2) [2]: " choice
+
+    # Default to option 2 if empty
+    choice=${choice:-2}
+
     case $choice in
         1)
             echo "Starting VibeKanban with API key..."
